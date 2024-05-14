@@ -2,7 +2,7 @@
 
 This repository contains data from the patch of the [CVE-2023-26136](https://nvd.nist.gov/vuln/detail/CVE-2023-26136) security volunerability in the  [tough-cookie](https://github.com/salesforce/tough-cookie) package for [v2.5.0](https://github.com/salesforce/tough-cookie/tree/v2.5.0).
 
-The [patch package version be found here](https://github.com/shaharduany/tough-cookie/tree/v2.5.0-PATCHED).
+The [patch package version in a forked repository be found here](https://github.com/shaharduany/tough-cookie/tree/v2.5.0-PATCHED).
 The [PR patching the v2.5.0 can be found here][https://github.com/shaharduany/tough-cookie/pull/1]
 
 ## Files overview
