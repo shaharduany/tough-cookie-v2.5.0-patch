@@ -1,17 +1,19 @@
 # tough-cookie v2.5.0 Patched
+
 This repository contains data from the patch of the [CVE-2023-26136](https://nvd.nist.gov/vuln/detail/CVE-2023-26136) security volunerability in the  [tough-cookie](https://github.com/salesforce/tough-cookie) package for [v2.5.0](https://github.com/salesforce/tough-cookie/tree/v2.5.0).
 
-The [patch can be found here](https://github.com/shaharduany/tough-cookie/tree/v2.5.0-PATCHED).
+The [patch package version be found here](https://github.com/shaharduany/tough-cookie/tree/v2.5.0-PATCHED).
 The [PR patching the v2.5.0 can be found here][https://github.com/shaharduany/tough-cookie/pull/1]
 
 ## Files overview
 
 * **tough-cookie-2.5.0-PATCHED.tgz** - Package of the patched tough-cookie v2.5.0
-* **changes.diff** - A git.diff file of the changes done for the patch
+* **changes.diff** - A git.diff file of the changes done for the patch - Can use `git apply changes.diff` on a clean v2.5.0 clone with no rejects.
 * **index.js** - An index file outputting result if the package can still be exploited
-* **.nvmrc** - To switch to the version requested (20 LTS) - Use
+* **.nvmrc** - To easily switch to the version requested (20 LTS) - `nvm use`
 
 ## Voluneerability Overview
+
 The [CVE-2023-26136](https://nvd.nist.gov/vuln/detail/CVE-2023-26136) is a securty report of the [CWE-1321](https://cwe.mitre.org/data/definitions/1321.html), also referred to as Prototype Pollution.
 
 **CWE Name:** Improperly Controlled Modification of Object Prototype Attributes ('Prototype Pollution')
@@ -30,6 +32,7 @@ The way this can be exploited, is if provided domain name `__proto__` (A getter 
 This can be used to cause downtime if overriding critical methods (Example, `Object.keys()`), or injecting data to the server.
 
 In other wors, in the putCookie() code before that
+
 ```
   putCookie(cookie, cb) {
     if (!this.idx[cookie.domain]) {
@@ -42,11 +45,13 @@ In other wors, in the putCookie() code before that
     cb(null);
   }
 ```
+
 If `cookie.domain === '__proto__'`, it leads the code to execute this line `this.idx.__proto__[path][key] = value`, which then we can use change the Object prototype.
 
 This issue was resolved by switching the store declartion to `Object.create(null)` which creates an object with a `null` prototype - which then, when accessing `__proto__` it returns null.
 
 ## Test suits
+
 I added the test suits done in the PR fixing the voluneerability in the Salesforce tough-cookie PR [#282](https://github.com/salesforce/tough-cookie/pull/283)
 
 And added an additional unit test.
@@ -54,16 +59,20 @@ I ran the tests using `npm run test` inside the package.
 I also had to remove deprecated tests for all the tests to run.
 
 ### Test suite result
+
 ![Test suite passing image](./screenshots//test-suite.png)
 
 ### Same additional tests fail in v2.5.0 (With 3 deprecated tests)
+
 ![Test suite fail with many errors](./screenshots//test-suite-with-additiona-tests.png)
 
 ### Test suite of v2.5.0 (With the 3 deprecated)
+
 ![Test suite v2.5.0 all pass but 3](./screenshots//test-suite-v2.5.0.png)
 
 
 ### The additional tests:
+
 ```js
 .addBatch({
     "Issue #282 - Prototype pollution": {
@@ -130,7 +139,9 @@ I also had to remove deprecated tests for all the tests to run.
 
 
 ## Scripts for easier index.js testing:
+
 A few scripts I used to debugging the outputs - for easier testing
+
 * `npm run exploit:version` - will run the `npm install tough-cookie@2.5.0 && node index.js`
 * `npm run patched:version` - Will run the `npm install ./tough-cookie-2.5.0-PATCHED.tgz && node index.js`
 * `npm run test` - Will run `exploit:version` and `patched:version` - **It is not a real test suite, just the output requested at the assignemnt**
