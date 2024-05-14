@@ -5,7 +5,8 @@
 	"main": "index.js",
 	"scripts": {
 		"exploit:version": "npm install tough-cookie@2.5.0 && node index.js",
-		"patched:version": "npm install ./tough-cookie-2.5.0-PATCHED.tgz && node index.js"
+		"patched:version": "npm install ./tough-cookie-2.5.0-PATCHED.tgz && node index.js",
+		"test": "echo \"exploit:version START\" && npm run exploit:version && echo \"exploit:version FINISHED\n\n\" && echo \"patched:version START\" && npm run patched:version && echo \"patched:version FINISHED\n\n\""
 	},
 	"keywords": [
 		"tough-cookie"
@@ -13,7 +14,7 @@
 	"author": "Shahar Duany",
 	"license": "ISC",
 	"dependencies": {
-		"tough-cookie": "^2.5.0"
+		"tough-cookie": "file:tough-cookie-2.5.0-PATCHED.tgz"
 	},
 	"engines": {
 		"node": ">=20"
