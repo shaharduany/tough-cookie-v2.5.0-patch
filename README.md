@@ -3,7 +3,7 @@
 This repository contains data from the patch of the [CVE-2023-26136](https://nvd.nist.gov/vuln/detail/CVE-2023-26136) security volunerability in the  [tough-cookie](https://github.com/salesforce/tough-cookie) package for [v2.5.0](https://github.com/salesforce/tough-cookie/tree/v2.5.0).
 
 The [patch package version in a forked repository be found here](https://github.com/shaharduany/tough-cookie/tree/v2.5.0-PATCHED).
-The [PR patching the v2.5.0 can be found here][https://github.com/shaharduany/tough-cookie/pull/1]
+The [PR patching the v2.5.0 can be found here](https://github.com/shaharduany/tough-cookie/pull/1)
 
 ## Files overview
 
@@ -137,11 +137,30 @@ I also had to remove deprecated tests for all the tests to run.
   })
   ```
 
-
 ## Scripts for easier index.js testing:
 
-A few scripts I used to debugging the outputs - for easier testing
+In the [forked repository](https://github.com/shaharduany/tough-cookie/tree/v2.5.0-PATCHED) I ran the tests using `npm run test` to test them.
+
+For easier testing and debugging the `index.js` in this repository, I added these tests
 
 * `npm run exploit:version` - will run the `npm install tough-cookie@2.5.0 && node index.js`
 * `npm run patched:version` - Will run the `npm install ./tough-cookie-2.5.0-PATCHED.tgz && node index.js`
-* `npm run test` - Will run `exploit:version` and `patched:version` - **It is not a real test suite, just the output requested at the assignemnt**
+* `npm run test` - Will run `exploit:version` and `patched:version` with echos signaling when it starts and finishes - **It is not a real test suite, just the output requested at the assignemnt**
+
+### Outputs
+
+#### npm run exploit:version
+
+![Exploit script output - Exploited successfuly output](./screenshots/npm-run-exploit.png)
+
+#### npm run patched:version
+
+![Patched script output - Exploit Failed output](./screenshots/npm-run-patched.png)
+
+#### git apply changes.diff
+
+![Git apply output - applied](./screenshots/git-apply-changes.png)
+
+#### git v2.5.0-PATCHED tag
+
+![Git apply output - applied](./screenshots/git-v2.5.0-PATCHED-tag.png)
