@@ -1,14 +1,18 @@
 {
-  "name": "tough-cookie-pollution-fix",
-  "version": "1.0.0",
-  "description": "This application demonstrates the fix done to tough-cookie prototype pollution risk",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [
-    "tough-cookie"
-  ],
-  "author": "Shahar Duany",
-  "license": "ISC"
+	"name": "tough-cookie-pollution-fix",
+	"version": "1.0.0",
+	"description": "This application demonstrates the fix done to tough-cookie prototype pollution risk",
+	"main": "index.js",
+	"scripts": {
+		"exploit:version": "nvm use && npm install tough-cookie@2.5.0 && node index.js",
+		"patched:version": "nvm use && npm install ./tough-cookie-2.5.0-PATCHED.tgz && node index.js"
+	},
+	"keywords": [
+		"tough-cookie"
+	],
+	"author": "Shahar Duany",
+	"license": "ISC",
+	"dependencies": {
+		"tough-cookie": "file:tough-cookie-2.5.0-PATCHED.tgz"
+	}
 }
