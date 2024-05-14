@@ -12,6 +12,6 @@ cookiejar.setCookieSync(
 );
 
 const outputNessage =
-	Hpath in Object ? "EXPLOITED SUCCESSFULLY" : "EXPLOIT FAILED";
+	path in Object ? "EXPLOITED SUCCESSFULLY" : "EXPLOIT FAILED";
 
-console.log(isPrototypePolluted);
+console.log(outputNessage);
