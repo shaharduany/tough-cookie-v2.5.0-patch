@@ -1,0 +1,14 @@
+{
+  "name": "tough-cookie-pollution-fix",
+  "version": "1.0.0",
+  "description": "This application demonstrates the fix done to tough-cookie prototype pollution risk",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "tough-cookie"
+  ],
+  "author": "Shahar Duany",
+  "license": "ISC"
+}
